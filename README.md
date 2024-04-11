@@ -5,7 +5,7 @@
   <img src="images/prediction.png" width="30%" height="400px" alt="Prediction">
 </div>
 
-This project aims to make a ML model able to predict the price of diamonds based on their characteristics, such as carat weight, cut, color, clarity and physical measurements.
+This project aims to make a ML model able to predict the price of diamonds based on their characteristics, such as carat weight, cut, color, clarity and physical measurements. Made to learn Flask and practice with machine learning techniques.
 
 The Jupyter Notebook is available [here](http://colab.research.google.com/drive/1H7VoevZx1NJzO6LREsGGekPzfUgccb2h "here"), which contains various steps, from Data Understanding to the effective Modeling.
 Here a summerized overview:
@@ -17,6 +17,7 @@ Here a summerized overview:
 - Modeling: prepare the training data and use of different machine learning algorithms to train predictive models.
 
 - Evaluation: evaluation the model performance using various metrics, such as R2 score, mean absolute error (MAE), and root mean squared error (RMSE).
+
 - Deployment: save the model to be used in a small webapp, using Flask, through form or API call
 
 
