@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Diamond Form</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <div class="panel">
+            <h2><center>Diamond Form</center></h2>
+            
+            <form action="{{ url_for('predict_price') }}" method="post">
+                <label for="carat">Carat:</label>
+                <input type="number" id="carat" name="carat" step="0.01" value="{{ old_values.get('carat', '1') }}" required><br>
+                
+                <label for="cut">
+                    Cut:
+                    <span class="help-icon" title="Cut help">&#9432;</span>
+                </label>
+                <div class="help-image">
+                    <img src="{{ url_for('static', filename='images/diamonds_cut.jpg') }}" alt="Help">
+                </div>
+                <select id="cut" name="cut" required>
+                    {% for cut in cuts %}
+                    <option value="{{ cut }}" {% if old_values.get("cut") == cut %} selected {%endif%}>{{ cut }}</option>
+                    {% endfor %}
+                </select><br>
+                
+                <label for="color">
+                    Color:
+                    <span class="help-icon" title="Color help">&#9432;</span>
+                </label>
+                <div class="help-image">
+                    <img src="{{ url_for('static', filename='images/diamonds_color.png') }}" alt="Help">
+                </div>
+                <select id="color" name="color" required>
+                    {% for color_group in colors %}
+                    <optgroup label="{{ color_group[0] }}">
+                        {% for color in color_group[1] %}
+                        <option value="{{ color }}" {% if old_values.get("color") == color %} selected {%endif%}>{{ color }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+                </select><br>
+                
+                <label for="clarity">
+                    Clarity:
+                    <span class="help-icon" title="Clarity help">&#9432;</span>
+                </label>
+                <div class="help-image">
+                    <img src="{{ url_for('static', filename='images/diamonds_clarity.png') }}" alt="Help">
+                </div>
+                <select id="clarity" name="clarity" required>
+                    {% for clarity in clarities %}
+                    <option value="{{ clarity }}" {% if old_values.get("clarity") == clarity %} selected {%endif%}>{{ clarity }}</option>
+                    {% endfor %}
+                </select><br>
+                
+                <br>
+                <label for="measures" class="measures">
+                    Measures
+                    <span class="help-icon" title="Measures help">&#9432;</span>
+                </label>
+                <div class="help-image">
+                    <img src="{{ url_for('static', filename='images/diamonds_size.png') }}" alt="Help">
+                </div>
+                <hr>
+
+                <label for="depth">Z Depth:</label>
+                <input type="number" id="depth" name="depth" step="0.01" value="{{ old_values.get('depth', '1') }}" required><br>
+                
+                <label for="table">Table Width:</label>
+                <input type="number" id="table" name="table" step="0.01" value="{{ old_values.get('table', '1') }}" required><br>
+                
+                <label for="x">X:</label>
+                <input type="number" id="x" name="x" step="0.01" value="{{ old_values.get('x', '1') }}" required><br>
+                
+                <label for="y">Y:</label>
+                <input type="number" id="y" name="y" step="0.01" value="{{ old_values.get('y', '1') }}" required><br>
+                
+                <label for="z">Z:</label>
+                <input type="number" id="z" name="z" step="0.01" value="{{ old_values.get('z', '1') }}" required><br>
+                
+                <br>
+                <input type="submit" value="Submit" style="display: block; margin: 0 auto;">
+            </form> 
+            {% if predictedPrice %}
+                <p align="center">Price estimation: <b>${{ predictedPrice }}</b></p>
+                <canvas id="featuresChart" width="400" height="400" data-features='{{features|tojson}}'></canvas>
+            {% endif %}
+        </div>
+    </body>
+    <footer>
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </footer>
+</html>
+        
