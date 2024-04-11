@@ -3,6 +3,7 @@ import os
 import numpy as np
 import shap
 import pandas as pd
+import bz2file as bz2
 
 # Map frontend Cut categories to those used in the Model
 cut_map = {
@@ -13,9 +14,13 @@ cut_map = {
     'Excellent': "Ideal"
 }
 
+def decompress_bz2(file):
+    dec_file = bz2.BZ2File(file, 'rb')
+    return dec_file
+
 class DiamondModel:
     def __init__(self, path):
-        self.model = pickle.load(open(os.path.join(path, 'regression_model.sav'), 'rb'))
+        self.model = pickle.load(decompress_bz2(open(os.path.join(path, 'regression_model.pbz2'), 'rb')))
         self.encoder = pickle.load(open(os.path.join(path, 'encoder.sav'), 'rb'))
         self.scaler = pickle.load(open(os.path.join(path, 'scaler.sav'), 'rb'))
 
