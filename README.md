@@ -1,4 +1,4 @@
-# Diamonds Price Predition
+# Diamonds Price Prediction
 <div align="center">
   <img src="images/api.png" width="30%" height="400px" alt="API">
   <img src="images/form.png" width="30%" height="400px" alt="Form">
